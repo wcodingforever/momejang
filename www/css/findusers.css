@@ -1,0 +1,97 @@
+﻿* { box-sizing: border-box; }
+
+html, body {
+    font-family: sans-serif;
+}
+
+#selectTitle {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#searchUser {
+    height: 2em;
+}
+
+#searchUserText {
+    width: 100%;
+    height: 1.8em;
+}
+
+#usersList {
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.userWrapper {
+    height: 4.5em;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 3px;
+}
+
+.userWrapper:nth-child(odd) { background-color: aliceblue; }
+
+.userTile {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 3px;
+    width: 4em;
+    height: 4em;
+    text-align: center;
+}
+
+.userTile img {
+    height: 3.5em;
+}
+
+.userData {
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: top;
+    height: 100%;
+}
+
+.userName {
+    font-weight: bold;
+}
+
+.userLocation {
+    color: grey;
+    font-size: 0.7em;
+}
+
+.userActions {
+    height: 100%;
+    padding: .6em;
+    float: right;
+}
+
+.userActions input {
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 3px;
+    height: 2em;
+}
+
+.profileImage {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.profileData {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profileName {
+    font-weight: bold;
+    font-size: 2em;
+}

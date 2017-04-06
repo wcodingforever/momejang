@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to your Team...</title>
+    <!--<link rel="stylesheet" href="css/vendor/jquery-ui-1.12.1.min.css" />-->
+    <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/findusers.css" />
+    <style>
+    </style>
+</head>
+<body>
+    <div role="main" class="ui-content">
+        <div data-role="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#teamTab" class="ui-btn-active">Team</a></li>
+                    <li><a href="#searchTab">Search</a></li>
+                    <li><a href="#profileTab">Profile</a></li>
+                </ul>
+            </div>
+            <div id="teamTab">
+                <div id="usersList">
+                    <div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                        <div class="userTile"><img src="img/roger.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Roger Rabbit</div>
+                            <div class="userLocation">Las Vegas, NV, USA</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="98c08f95-778f-44d2-b8ec-ea031b7fec52">
+                        <div class="userTile"><img src="img/jessica.jpg" /></div>
+                        <div class="userData">
+                            <div class="userName">Jessica Rabbit</div>
+                            <div class="userLocation">Las Vegas, NV, USA</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="112390f7-3408-4006-8692-f1770b0b327f">
+                        <div class="userTile"><img src="img/chilly.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Chilly Willy</div>
+                            <div class="userLocation">Norway</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="5568b342-3ca2-43d1-840f-d4e1397e4454">
+                        <div class="userTile"><img src="img/duke.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Duke Nukem</div>
+                            <div class="userLocation">Seoul, South Korea</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="searchTab">
+                <div id="selectTitle">Work out with...</div>
+                <div id="searchUser"><input id="searchUserText" type="text" placeholder="Search by name or id!" /></div>
+                <div id="usersList">
+                    <div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                        <div class="userTile"><img src="img/roger.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Roger Rabbit</div>
+                            <div class="userLocation">Las Vegas, NV, USA</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="98c08f95-778f-44d2-b8ec-ea031b7fec52">
+                        <div class="userTile"><img src="img/jessica.jpg" /></div>
+                        <div class="userData">
+                            <div class="userName">Jessica Rabbit</div>
+                            <div class="userLocation">Las Vegas, NV, USA</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="112390f7-3408-4006-8692-f1770b0b327f">
+                        <div class="userTile"><img src="img/chilly.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Chilly Willy</div>
+                            <div class="userLocation">Norway</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                    <div class="userWrapper" id="5568b342-3ca2-43d1-840f-d4e1397e4454">
+                        <div class="userTile"><img src="img/duke.png" /></div>
+                        <div class="userData">
+                            <div class="userName">Duke Nukem</div>
+                            <div class="userLocation">Seoul, South Korea</div>
+                        </div>
+                        <div class="userActions">
+                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="profileTab">
+                <div class="profileImage"><img src="img/duke.png" /></div>
+                <div class="profileData">
+                    <div class="profileName">Duke Nukem</div>
+                    <div class="profileLocation">Seoul, South Korea</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
+    <!--<script src="js/jquery-ui-1.12.1.min.js"></script>-->
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        $('.userWrapper').on('click', function (evt) {
+            console.log("Clicked on User: " + $(this).attr('id'));
+        });
+
+        $('#searchUserText').on('keypress', function (evt) {
+            if (evt.which === 13) {
+                var searchTerm = $(this).val();
+                console.log("Got search term: " + searchTerm);
+
+                var errorMsg = [];
+                searchTerm = searchTerm.trim();
+                if (searchTerm.length <= 3) errorMsg.push("Search term needs to be at least 3 characters!");
+
+                if (errorMsg.length !== 0) alert(errorMsg.join('\n'));
+            }
+        });
+
+        //$("#tabs").tabs();
+    </script>
+</body>
+</html>
