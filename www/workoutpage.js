@@ -1,4 +1,4 @@
-from 'js/utils.js' import sendWS
+import sendWS from './js/utils.js';
 
 angular.module('myIonicPopUpApp', ['ionic'])
     .controller('PopupCtrl',function($scope, $ionicPopup, $timeout) {
@@ -30,32 +30,9 @@ angular.module('myIonicPopUpApp', ['ionic'])
                      }
                 };
                 sendWS(messageObj)
-                {
-                  ws.send("{ \"Event\" : \"saveuserstats:\"}, \"Payload\" : [ \"Metric\" : \"Reps\", \"Value\" : \"8\"""]");
-                }
               }
             },
           ]
-        });
-        myPopup.then(function(res) {
-
-          if(res){
-
-              if(res.userPassword==res.confirmPassword)
-              {
-                console.log('Password Is Ok');
-              }
-              else
-              {
-                console.log('Password not matched');
-              }
-          }
-          else
-          {
-            console.log('Enter password');
-          }
-
-
         });
 
       };
