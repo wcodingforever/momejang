@@ -29,7 +29,13 @@ try:
                 "CREATE TABLE Profile" \
                 "(ProfileID bigint auto_increment primary key, UserID bigint, ProfilePicture varchar(256), AboutMe varchar(256), " \
                 "CONSTRAINT fk_profile_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE);" \
-                "CREATE FULLTEXT INDEX usersearchindex ON User (Username, FirstName, LastName);"
+                "CREATE FULLTEXT INDEX usersearchindex ON User (Username, FirstName, LastName);" \
+                "CREATE TABLE UserWorkout" \
+                "(UserWorkoutID bigint auto_increment primary key, UserID bigint, WorkoutName varchar(256), WorkoutDate DateTime, " \
+                "CONSTRAINT fk_userworkout_user_userid FOREIGN KEY (UserID) References User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE); " \
+                "CREATE TABLE UserHistory " \
+                "(UserHistoryID bigint auto_increment primary key, UserID bigint, Exercise varchar(256), Repetitions bigint, Sets bigint, " \
+                "CONSTRAINT fk_userhistory_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE);"
 
         cursor.execute(sql)
 

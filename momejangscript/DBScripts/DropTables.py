@@ -11,7 +11,9 @@ connection = pymysql.connect(host='localhost',
 try:
     with connection.cursor() as cursor:
 
-        sql = "DROP TABLE Profile;" \
+        sql = "DROP TABLE UserHistory;" \
+              "DROP TABLE UserWorkout;" \
+              "DROP TABLE Profile;" \
               "DROP TABLE Message; " \
                 "DROP TABLE GroupUser; " \
                 "DROP TABLE ChatRoom; " \

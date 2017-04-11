@@ -64,8 +64,8 @@ def searchforuser(jsonDict):
 
             sql = "SELECT u.UserID, u.Username, u.FirstName, u.LastName, p.ProfilePicture, " \
                   "MATCH (Username, FirstName, LastName) AGAINST (%s IN BOOLEAN MODE) AS RELEVANCE " \
-                  "FROM User u" \
-                  "INNER JOIN Profile p ON u.UserID=p.UserID" \
+                  "FROM User u " \
+                  "INNER JOIN Profile p ON u.UserID=p.UserID " \
                   "WHERE MATCH (Username, FirstName, LastName) AGAINST (%s IN BOOLEAN MODE) " \
                   "LIMIT 20 OFFSET %s;"
 
@@ -92,11 +92,11 @@ def sendmessage(jsonDict):
 
         c.commit()
     except:
-        c.close()
+        #c.close()
         return "Message failed to send."
 
     finally:
-        c.close()
+        #c.close()
         return "Message sent."
 
 def getmessage(jsonDict):
@@ -121,7 +121,7 @@ def getmessage(jsonDict):
 
 def getmessagehistory(jsonDict):
     try:
-        c = ac()
+        c = ac().connection
 
         with c.cursor() as cursor:
 
@@ -143,6 +143,27 @@ def getmessagehistory(jsonDict):
         else:
             return result
 
+def saveuserstats(jsonDict):
+
+    c = ac().connection
+
+    try:
+        with c.cursor() as cursor:
+
+            sql = "INSERT INTO UserHistory (UserID, Exercise, Repetitions, Sets) VALUES (%s, %s, %s, %s);"
+
+            cursor.execute(sql, (jsonDict["userid"], jsonDict["exercise"], jsonDict["repetitions"], jsonDict["sets"]))
+
+            c.commit()
+
+    except:
+        return "Error saving stats."
+
+    finally:
+        c.close()
+        return "Stats saved."
+
+
 
 def decision(event, eventDict):
     if event == 'searchforuser':
@@ -155,5 +176,7 @@ def decision(event, eventDict):
         return getmessagehistory(eventDict)
     elif event == 'createnewuser':
         return createnewuser(eventDict)
+    elif event == 'saveuserstats':
+        return saveuserstats(eventDict)
     else:
         return "Invalid function name!"
