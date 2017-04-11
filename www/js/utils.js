@@ -20,7 +20,7 @@ function sendWS(inObj, callback) {
         // ws = new WebSocket("ws://192.168.1.119:8001/");
 
         ws.onopen = function() {
-            var messageStr = JSON.stringify(messageObj);
+            var messageStr = JSON.stringify(inObj);
             ws.send(messageStr);
             console.log("Message is sent...[" + messageStr + "]");
         };

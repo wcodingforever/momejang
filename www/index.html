@@ -59,16 +59,38 @@
     <script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
     <!--<script src="js/jquery-ui-1.12.1.min.js"></script>-->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/utils.js"></script>
     <script>
         // $("#firstname").parent.toggle();
         $("#moreInfo").toggle();
+
         $("#newUserButton").click(function(e) {
             $("#loginButton").toggle();
             $("#moreInfo").toggle();
         });
+
         $("#addUserButton").click(function(e) {
-            
+            let newUser = ($("#username").val()) ? $("#username").val() : "";
+            let newPass = ($("#passwd").val()) ? $("#passwd").val() : "";
+            let fname = ($("#firstname").val()) ? $("#firstname").val() : "";
+            let lname = ($("#lastname").val()) ? $("#lastname").val() : "";
+            var newObj = {
+                event: "createnewuser"
+                , payload: {
+                    username: newUser
+                    , firstname: fname
+                    , lastname: lname
+                    , password: newPass
+                }
+            };
+            sendWS(newObj, function() {
+                alert("User " + $("#username").val() + " created! Welcome!");
+            });
         });
+
+        $("#loginButton").click(function(e) { loggedIn(); });
+
+        function loggedIn() { window.location.href=""; }
     </script>
 </body>
 </html>
