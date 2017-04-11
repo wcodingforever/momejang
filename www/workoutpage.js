@@ -1,4 +1,3 @@
-import sendWS from './js/utils.js';
 
 angular.module('myIonicPopUpApp', ['ionic'])
     .controller('PopupCtrl',function($scope, $ionicPopup, $timeout) {
@@ -25,8 +24,9 @@ angular.module('myIonicPopUpApp', ['ionic'])
                      event: "saveuserstats"
                      , payload: {
                           userid: "1"
-                         , Metric: "Bicep Curls"
-                         , Value: "8"
+                         , exercise: "Bicep Curls"
+                         , repetitions: "8"
+                         , sets: "3"
                      }
                 };
                 sendWS(messageObj)
