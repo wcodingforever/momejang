@@ -4,8 +4,11 @@
     <title>Add to your Team...</title>
     <!--<link rel="stylesheet" href="css/vendor/jquery-ui-1.12.1.min.css" />-->
     <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.3.3.7.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-theme.3.3.7.min.css" />
     <link rel="stylesheet" href="css/findusers.css" />
     <style>
+        .input-group-btn button span { color: white; }
     </style>
 </head>
 <body>
@@ -64,9 +67,16 @@
             </div>
             <div id="searchTab">
                 <div id="selectTitle">Work out with...</div>
-                <div id="searchUser"><input id="searchUserText" type="text" placeholder="Search by name or id!" /></div>
+                <div id="searchUser" class="input-group">
+                    <input id="searchUserText" type="text" class="form-control" placeholder="Search by name or id!" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </div>
                 <div id="usersList">
-                    <div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                    <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
                         <div class="userTile"><img src="img/roger.png" /></div>
                         <div class="userData">
                             <div class="userName">Roger Rabbit</div>
@@ -75,37 +85,7 @@
                         <div class="userActions">
                             <a href="#" data-role="button" data-mini="true">Add to Team</a>
                         </div>
-                    </div>
-                    <div class="userWrapper" id="98c08f95-778f-44d2-b8ec-ea031b7fec52">
-                        <div class="userTile"><img src="img/jessica.jpg" /></div>
-                        <div class="userData">
-                            <div class="userName">Jessica Rabbit</div>
-                            <div class="userLocation">Las Vegas, NV, USA</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
-                    <div class="userWrapper" id="112390f7-3408-4006-8692-f1770b0b327f">
-                        <div class="userTile"><img src="img/chilly.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Chilly Willy</div>
-                            <div class="userLocation">Norway</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
-                    <div class="userWrapper" id="5568b342-3ca2-43d1-840f-d4e1397e4454">
-                        <div class="userTile"><img src="img/duke.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Duke Nukem</div>
-                            <div class="userLocation">Seoul, South Korea</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div id="profileTab">
@@ -121,23 +101,61 @@
     <script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
     <!--<script src="js/jquery-ui-1.12.1.min.js"></script>-->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/bootstrap.3.3.7.min.js"></script>
+    <script src="js/utils.js"></script>
     <script>
         $('.userWrapper').on('click', function (evt) {
             console.log("Clicked on User: " + $(this).attr('id'));
         });
 
-        $('#searchUserText').on('keypress', function (evt) {
-            if (evt.which === 13) {
-                var searchTerm = $(this).val();
-                console.log("Got search term: " + searchTerm);
+        $('#searchUserText').on('keypress', function (evt) { if (evt.which === 13) { findTeam(); } });
+        $('.input-group-btn button span').click(function(e) { findTeam(); });
 
-                var errorMsg = [];
-                searchTerm = searchTerm.trim();
-                if (searchTerm.length <= 3) errorMsg.push("Search term needs to be at least 3 characters!");
+        function getTeam() {
 
-                if (errorMsg.length !== 0) alert(errorMsg.join('\n'));
+        }
+
+        function findTeam() {
+            var searchTerm = $("#searchUserText").val();
+            console.log("Got search term: " + searchTerm);
+
+            var errorMsg = [];
+            searchTerm = searchTerm.trim();
+            if (searchTerm.length <= 3) errorMsg.push("Search term needs to be at least 3 characters!");
+
+            if (errorMsg.length !== 0) {
+                alert(errorMsg.join('\n'));
+                return;
             }
-        });
+
+            var thisObj = {
+                event: "searchforuser"
+                , payload: {
+                    parameter: searchTerm
+                    , offset: 0
+                }
+            };
+            sendWS(thisObj, function(inData) {
+                if (inData) {
+                    var inObj = JSON.parse(inData);
+                    for (var i = 0; i < inObj.length; i++) {
+                        var newHtml = '<div class="userWrapper" id="' + inData.UserID + '">'
+                            + '<div class="userTile"><img src="img/duke.png" /></div>'
+                            + '<div class="userData">'
+                                + '<div class="userName">' + inData.Username + '</div>'
+                                + '<div class="userFullname">' + inData.FirstName + ' ' + inData.LastName + '/div>'
+                            + '</div>'
+                            + '<div class="userActions">'
+                                + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
+                            + '</div>'
+                            + '</div>';
+
+                        $(newHtml).appendTo("#usersList");
+                    }
+                }
+            });
+
+        }
 
         //$("#tabs").tabs();
     </script>
