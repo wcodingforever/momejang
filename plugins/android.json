@@ -7,13 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.wcoding.momejang"
-        },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.wcoding.momejang"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.wcoding.momejang"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.wcoding.momejang"
         }
     },
