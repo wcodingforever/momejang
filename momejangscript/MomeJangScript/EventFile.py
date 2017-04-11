@@ -63,7 +63,6 @@ def searchforuser(jsonDict):
         with c.cursor() as cursor:
 
             sql = "SELECT u.UserID, u.Username, u.FirstName, u.LastName, p.ProfilePicture, " \
-                  "MATCH (Username, FirstName, LastName) AGAINST (%s IN BOOLEAN MODE) AS RELEVANCE " \
                   "FROM User u " \
                   "INNER JOIN Profile p ON u.UserID=p.UserID " \
                   "WHERE MATCH (Username, FirstName, LastName) AGAINST (%s IN BOOLEAN MODE) " \
@@ -77,7 +76,7 @@ def searchforuser(jsonDict):
         if result.__len__() == 0:
             return str(result)
         else:
-            return returnprofiles(result)
+            return result
 
 def sendmessage(jsonDict):
     try:
