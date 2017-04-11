@@ -1,58 +1,74 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src * blob:; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <a href="findusers.html"><h1>Apache Cordova</h1></a>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-                <p>
-                    <!--<button onclick="capturePhoto();">Capture Photo</button> <br>-->
-                    <button onclick="openCamera();">Capture Photo</button> <br>
-                    <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
-                    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-                    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-                    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-                    <img style="display:none;" id="largeImage" src="" />
-                </p>
-            </div>
+<head>
+    <title>Add to your Team...</title>
+    <!--<link rel="stylesheet" href="css/vendor/jquery-ui-1.12.1.min.css" />-->
+    <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/findusers.css" />
+    <style>
+        html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+            background-image: url("img/workoutsiconfull.png");
+            background-size: cover;
+            background-position: center;
+        }
+        #loginArea {
+            margin: 33% 10%;
+            display: block;
+            align-items: center;
+            background-color: rgba(30, 30, 30, .8);
+            border-radius: 50px;
+            padding: 7em;
+        }
+        input {
+            font-size: 2em;
+            width: 100%;
+        }
+        #loginButton, #addUserButton {
+            background-color: cornflowerblue;
+            color: white;
+            font-size: 2em;
+            text-transform: uppercase;
+            height: 2em;
+            margin: 2em 2em 1em 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #newUserButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginArea">
+        <input type="text" id="username" value="pumpyouup">
+        <input type="password" id="passwd" value="hanzfranz">
+        <div id="moreInfo">
+            <input type="text" id="firstname">
+            <input type="text" id="lastname">
+            <div id="addUserButton">Add User</div>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-   </body>
+        <div id="loginButton">Login</div>
+        <div id="newUserButton">New User</div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
+    <!--<script src="js/jquery-ui-1.12.1.min.js"></script>-->
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        // $("#firstname").parent.toggle();
+        $("#moreInfo").toggle();
+        $("#newUserButton").click(function(e) {
+            $("#loginButton").toggle();
+            $("#moreInfo").toggle();
+        });
+        $("#addUserButton").click(function(e) {
+            
+        });
+    </script>
+</body>
 </html>
