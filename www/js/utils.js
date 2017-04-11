@@ -11,8 +11,9 @@
 //         , password: "$#&@*`\t!%^()_-=+|?\r;][\""
 //     }
 // };
-
+//
 // sendWs(messageObj, callback);
+// The callback parameter is optional.
 //
 function sendWS(inObj, callback) {
     if ("WebSocket" in window) {
@@ -27,7 +28,7 @@ function sendWS(inObj, callback) {
             
         ws.onmessage = function (evt) { 
             console.log("Message is received..." + evt.data);
-            callback(evt.data)
+            if (typeof callback === 'function') callback(evt.data)
         };
             
         ws.onclose = function() { console.log("Connection is closed..."); };

@@ -83,9 +83,8 @@
                     , password: newPass
                 }
             };
-            sendWS(newObj, function() {
-                alert("User " + $("#username").val() + " created! Welcome!");
-            });
+            //sendWS(newObj, function() { alert("User " + $("#username").val() + " created! Welcome!"); });
+            sendWS(newObj);
         });
 
         $("#loginButton").click(function(e) { loggedIn(); });
