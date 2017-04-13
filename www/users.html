@@ -16,14 +16,14 @@
         <div data-role="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#teamTab" class="ui-btn-active">Team</a></li>
+                    <li id="teamtab"><a href="#teamTab" class="ui-btn-active">Team</a></li>
                     <li><a href="#searchTab">Search</a></li>
                     <li><a href="#profileTab">Profile</a></li>
                 </ul>
             </div>
             <div id="teamTab">
                 <div id="usersList">
-                    <div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                    <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
                         <div class="userTile"><img src="img/roger.png" /></div>
                         <div class="userData">
                             <div class="userName">Roger Rabbit</div>
@@ -32,37 +32,7 @@
                         <div class="userActions">
                             <a href="#" data-role="button" data-mini="true">Add to Team</a>
                         </div>
-                    </div>
-                    <div class="userWrapper" id="98c08f95-778f-44d2-b8ec-ea031b7fec52">
-                        <div class="userTile"><img src="img/jessica.jpg" /></div>
-                        <div class="userData">
-                            <div class="userName">Jessica Rabbit</div>
-                            <div class="userLocation">Las Vegas, NV, USA</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
-                    <div class="userWrapper" id="112390f7-3408-4006-8692-f1770b0b327f">
-                        <div class="userTile"><img src="img/chilly.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Chilly Willy</div>
-                            <div class="userLocation">Norway</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
-                    <div class="userWrapper" id="5568b342-3ca2-43d1-840f-d4e1397e4454">
-                        <div class="userTile"><img src="img/duke.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Duke Nukem</div>
-                            <div class="userLocation">Seoul, South Korea</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div id="searchTab">
@@ -75,7 +45,7 @@
                         </button>
                     </span>
                 </div>
-                <div id="usersList">
+                <div id="searchResultsList">
                     <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
                         <div class="userTile"><img src="img/roger.png" /></div>
                         <div class="userData">
@@ -104,15 +74,43 @@
     <script src="js/bootstrap.3.3.7.min.js"></script>
     <script src="js/utils.js"></script>
     <script>
-        $('.userWrapper').on('click', function (evt) {
-            console.log("Clicked on User: " + $(this).attr('id'));
-        });
+        // $('.userWrapper').on('click', function (evt) { console.log("Clicked on User: " + $(this).attr('id')); });
+
+        $(function() { getTeam(); });
+        $("#teamtab").click(function() { getTeam(); });
 
         $('#searchUserText').on('keypress', function (evt) { if (evt.which === 13) { findTeam(); } });
-        $('.input-group-btn button span').click(function(e) { findTeam(); });
+        $('.input-group-btn').click(function(e) { findTeam(); });
 
         function getTeam() {
-
+            var thisObj = {
+                event: "getfriendlist"
+                , payload: {
+                    userid: 1
+                    , offset: 0
+                }
+            }
+            sendWS(thisObj, function(inData) {
+                if (inData) {
+                    var inObj = JSON.parse(inData);
+                    if (inObj.code === 0) {
+                        for (var i = 0; i < inObj.results.length; i++) {
+                            var thisResults = inObj.results[i];
+                            var newHtml = '<div class="userWrapper" id="' + thisResults.UserID + '">'
+                                + '<div class="userTile"><img src="img/duke.png" /></div>'
+                                + '<div class="userData">'
+                                    + '<div class="userName">' + thisResultsinObj.Username + '</div>'
+                                    + '<div class="userFullname">' + thisResultsinObj.FirstName + ' ' + thisResultsinObj.LastName + '</div>'
+                                + '</div>'
+                                + '<div class="userActions">'
+                                    + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
+                                + '</div>'
+                                + '</div>';
+                            $("#usersList").append(newHtml);
+                        }
+                    } else { alert(inObj.message); }
+                }
+            });
         }
 
         function findTeam() {
@@ -138,20 +136,32 @@
             sendWS(thisObj, function(inData) {
                 if (inData) {
                     var inObj = JSON.parse(inData);
-                    for (var i = 0; i < inObj.length; i++) {
-                        var newHtml = '<div class="userWrapper" id="' + inData.UserID + '">'
-                            + '<div class="userTile"><img src="img/duke.png" /></div>'
-                            + '<div class="userData">'
-                                + '<div class="userName">' + inData.Username + '</div>'
-                                + '<div class="userFullname">' + inData.FirstName + ' ' + inData.LastName + '/div>'
-                            + '</div>'
-                            + '<div class="userActions">'
-                                + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
-                            + '</div>'
-                            + '</div>';
-
-                        $(newHtml).appendTo("#usersList");
-                    }
+                    if (inObj.code === 0) {
+                        for (var i = 0; i < inObj.length; i++) {
+                            var newHtml = '<div class="userWrapper" id="' + inObj[i].UserID + '">'
+                                + '<div class="userTile"><img src="img/duke.png" /></div>'
+                                + '<div class="userData">'
+                                    + '<div class="userName">' + inObj[i].Username + '</div>'
+                                    + '<div class="userFullname">' + inObj[i].FirstName + ' ' + inObj[i].LastName + '</div>'
+                                + '</div>'
+                                + '<div class="userActions">'
+                                    + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
+                                + '</div>'
+                                + '</div>';
+                            $("#searchResultsList").append(newHtml);
+                            let friendID = inObj[i].UserID;
+                            $("#" + inObj[i].UserID).click(function() {
+                                var reqObj = {
+                                    event: "addfriend"
+                                    , payload: {
+                                        userid: 1
+                                        , frienduserid: friendID 
+                                    }
+                                }
+                                sendWS(reqObj, function(inAddResult) { alert(inAddResult); })
+                            });
+                        }
+                    } else { alert(inObj.message); }
                 }
             });
 

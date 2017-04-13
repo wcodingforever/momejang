@@ -27,7 +27,7 @@ function sendWS(inObj, callback) {
         };
             
         ws.onmessage = function (evt) { 
-            console.log("Message is received..." + evt.data);
+            console.log("Message is received...[" + evt.data + "]");
             if (typeof callback === 'function') callback(evt.data)
         };
             

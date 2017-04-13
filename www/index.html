@@ -9,7 +9,7 @@
         html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
 
         .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
-            background-image: url("img/workoutsiconfull.png");
+            background-image: url("img/logo.png");
             background-size: cover;
             background-position: center;
         }
@@ -87,9 +87,9 @@
             //sendWS(newObj);
         });
 
-        $("#loginButton").click(function(e) { loggedIn(); });
+        $("#loginButton").click(function(e) { loggedIn(1); });
 
-        function loggedIn() { window.location.href=""; }
+        function loggedIn(inID) { window.location.href=""; }
     </script>
 </body>
 </html>
