@@ -93,14 +93,14 @@
             sendWS(thisObj, function(inData) {
                 if (inData) {
                     var inObj = JSON.parse(inData);
-                    if (inObj.code === 0) {
+                   if (inObj.code === 0) {
                         for (var i = 0; i < inObj.results.length; i++) {
                             var thisResults = inObj.results[i];
                             var newHtml = '<div class="userWrapper" id="' + thisResults.UserID + '">'
                                 + '<div class="userTile"><img src="img/duke.png" /></div>'
                                 + '<div class="userData">'
-                                    + '<div class="userName">' + thisResultsinObj.Username + '</div>'
-                                    + '<div class="userFullname">' + thisResultsinObj.FirstName + ' ' + thisResultsinObj.LastName + '</div>'
+                                    + '<div class="userName">' + thisResults.Username + '</div>'
+                                    + '<div class="userFullname">' + thisResults.FirstName + ' ' + thisResults.LastName + '</div>'
                                 + '</div>'
                                 + '<div class="userActions">'
                                     + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
@@ -108,7 +108,7 @@
                                 + '</div>';
                             $("#usersList").append(newHtml);
                         }
-                    } else { alert(inObj.message); }
+                    } else { alert("PROBLEM: " + inObj.message); }
                 }
             });
         }
@@ -119,7 +119,7 @@
 
             var errorMsg = [];
             searchTerm = searchTerm.trim();
-            if (searchTerm.length <= 3) errorMsg.push("Search term needs to be at least 3 characters!");
+            if (searchTerm.length < 3) errorMsg.push("Search term needs to be at least 3 characters!");
 
             if (errorMsg.length !== 0) {
                 alert(errorMsg.join('\n'));
@@ -136,20 +136,22 @@
             sendWS(thisObj, function(inData) {
                 if (inData) {
                     var inObj = JSON.parse(inData);
+                    $("#searchResultsList").empty();
                     if (inObj.code === 0) {
-                        for (var i = 0; i < inObj.length; i++) {
-                            var newHtml = '<div class="userWrapper" id="' + inObj[i].UserID + '">'
+                        for (var i = 0; i < inObj.results.length; i++) {
+                            var thisResults = inObj.results[i];
+                            var newHtml = '<div class="userWrapper" id="' + thisResults.UserID + '">'
                                 + '<div class="userTile"><img src="img/duke.png" /></div>'
                                 + '<div class="userData">'
-                                    + '<div class="userName">' + inObj[i].Username + '</div>'
-                                    + '<div class="userFullname">' + inObj[i].FirstName + ' ' + inObj[i].LastName + '</div>'
+                                    + '<div class="userName">' + thisResults.Username + '</div>'
+                                    + '<div class="userFullname">' + thisResults.FirstName + ' ' + thisResults.LastName + '</div>'
                                 + '</div>'
                                 + '<div class="userActions">'
                                     + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
                                 + '</div>'
                                 + '</div>';
                             $("#searchResultsList").append(newHtml);
-                            let friendID = inObj[i].UserID;
+                            let friendID = thisResults.UserID;
                             $("#" + inObj[i].UserID).click(function() {
                                 var reqObj = {
                                     event: "addfriend"
@@ -161,10 +163,9 @@
                                 sendWS(reqObj, function(inAddResult) { alert(inAddResult); })
                             });
                         }
-                    } else { alert(inObj.message); }
+                    } else { "PROBLEM: " + alert(inObj.message); }
                 }
             });
-
         }
 
         //$("#tabs").tabs();
