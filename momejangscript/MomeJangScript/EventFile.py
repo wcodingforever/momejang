@@ -1,4 +1,5 @@
 from MomeJangScript.ConnectionFile import appconnection as ac
+from MomeJangScript.CodeHelper import CodeHelper
 
 def createnewprofile(userID):
     c = ac().connection
@@ -62,21 +63,22 @@ def searchforuser(jsonDict):
 
         with c.cursor() as cursor:
 
-            sql = "SELECT u.UserID, u.Username, u.FirstName, u.LastName, p.ProfilePicture, " \
+            sql = "SELECT u.UserID, u.Username, u.FirstName, u.LastName, p.ProfilePicture " \
                   "FROM User u " \
                   "INNER JOIN Profile p ON u.UserID=p.UserID " \
                   "WHERE MATCH (Username, FirstName, LastName) AGAINST (%s IN BOOLEAN MODE) " \
                   "LIMIT 20 OFFSET %s;"
 
-            cursor.execute(sql, (jsonDict["parameter"], jsonDict["parameter"], jsonDict["offset"]))
+            cursor.execute(sql, (jsonDict["parameter"], jsonDict["offset"]))
             result = cursor.fetchall()
-
+    except:
+        print("Error!")
     finally:
         c.close()
         if result.__len__() == 0:
-            return str(result)
+            return CodeHelper.buildJSONreturn(1, "Generic Error", 0)
         else:
-            return result
+            return CodeHelper.buildJSONreturn(0, "No message", result)
 
 def sendmessage(jsonDict):
     try:
@@ -162,6 +164,51 @@ def saveuserstats(jsonDict):
         c.close()
         return "Stats saved."
 
+def getfriendlist(jsonDict):
+    result = None
+    c = ac().connection
+    try:
+
+        with c.cursor() as cursor:
+
+            sql = "SELECT u.UserID, u.Username, u.FirstName, u.LastName, p.ProfilePicture " \
+                  "FROM User u " \
+                  "INNER JOIN Profile p ON u.UserID=p.UserID " \
+                  "INNER JOIN Friendlist f on u.UserID=f.FriendUserID " \
+                  "WHERE f.UserID = %s " \
+                  "LIMIT 20 OFFSET %s;"
+
+            cursor.execute(sql, (jsonDict["userid"], jsonDict["offset"]))
+            result = cursor.fetchall()
+    except:
+        print("Error!")
+    finally:
+        c.close()
+        if result == None:
+            return CodeHelper.buildJSONreturn(1, "Generic Error", "")
+        else:
+            return CodeHelper.buildJSONreturn(0, "No message.", result)
+
+def addfriend(jsonDict):
+
+    c = ac().connection
+
+    try:
+        with c.cursor() as cursor:
+
+            sql = "INSERT INTO FriendList (UserID, FriendUserID) VALUES (%s, %s);"
+
+            cursor.execute(sql, (jsonDict["userid"], jsonDict["frienduserid"]))
+
+            c.commit()
+
+    except:
+        print("error")
+        return CodeHelper.buildJSONreturn(1, "Generic Error", "")
+
+    finally:
+        c.close()
+        return CodeHelper.buildJSONreturn(0, "Friend added.", None)
 
 
 def decision(event, eventDict):
@@ -177,5 +224,9 @@ def decision(event, eventDict):
         return createnewuser(eventDict)
     elif event == 'saveuserstats':
         return saveuserstats(eventDict)
+    elif event == 'addfriend':
+        return addfriend(eventDict)
+    elif event == 'getfriendlist':
+        return getfriendlist(eventDict)
     else:
         return "Invalid function name!"

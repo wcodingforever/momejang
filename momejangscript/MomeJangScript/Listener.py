@@ -5,9 +5,8 @@ async def master(websocket, path):
         task = await websocket.recv()
         print(task)
         event = json.loads(task)
-        result = str(decision(event["event"], event["payload"]))
+        result = decision(event["event"], event["payload"])
         print(result)
-        result = json.JSONEncoder().encode(result)
         await websocket.send(result)
 
 PORT = 8001
