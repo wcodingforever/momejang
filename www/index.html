@@ -4,6 +4,9 @@
     <title>Add to your Team...</title>
     <!--<link rel="stylesheet" href="css/vendor/jquery-ui-1.12.1.min.css" />-->
     <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap.3.3.7.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-theme.3.3.7.min.css" />
+    <link rel="stylesheet" href="css/vendor/ionic.min.css">
     <link rel="stylesheet" href="css/findusers.css" />
     <style>
         html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
@@ -20,7 +23,7 @@
             align-items: center;
             background-color: rgba(30, 30, 30, .8);
             border-radius: 50px;
-            padding: 7em;
+            padding: 3em;
         }
         /*input {
             font-size: 2em;
@@ -43,28 +46,225 @@
             align-items: center;
             color: white;
         }
+
+        .workoutButton { float: right; width: 15em; }
+        .ui-collapsible-heading .ui-btn .ui-mini { text-align: center; }
+        
+        #page2 { text-align: center; }
+        #planButton, #picButton, #bmiButton {
+            display: block;
+            margin: 3em auto 3em auto;
+            width: 50%;
+            line-height: 2em;
+        }
+        #backButton, #backButtonBmi { width: 50%; position: absolute; bottom: 0px; margin: auto; }
+
+        #page2b { padding: 1em; }
+
+        .input-group-btn button span { color: white; }
+ 
     </style>
 </head>
 <body>
-    <div id="loginArea">
-        <input type="text" id="username" value="pumpyouup">
-        <input type="password" id="passwd" value="hanzfranz">
-        <div id="moreInfo">
-            <input type="text" id="firstname">
-            <input type="text" id="lastname">
-            <div id="addUserButton">Add User</div>
+    <div data-role="page" id="page0">
+        <div id="loginArea">
+            <input type="text" id="username" value="pumpyouup">
+            <input type="password" id="passwd" value="hanzfranz">
+            <div id="moreInfo">
+                <input type="text" id="firstname">
+                <input type="text" id="lastname">
+                <div id="addUserButton">Add User</div>
+            </div>
+            <div id="loginButton">Login</div>
+            <div id="newUserButton">New User</div>
         </div>
-        <div id="loginButton">Login</div>
-        <div id="newUserButton">New User</div>
     </div>
+
+    <div data-role="page" id="page1">
+        <div data-role="content">
+            <div data-role="collapsibleset">
+                <div data-role="collapsible">
+                    <h3>Upper Body</h3>
+                    <div data-role="collapsible">
+                        <h3>Bench Press (chest & arms)</h3>
+                        <p>Lay on a flat or incline bench press station. Grip the barbell at shoulder-width, bring it down to your chest, then push back up to full arm extension.</p>
+                        <img src="img\exBenchPress.jpg" align="middle" alt="Bench Press" height="200">
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>Military Press (shoulders & arms)</h3>
+                        <p>Done either sitting or standing, hold either a barbell or two dumbbells at shoulder-height. Press the weight up & overhead to full arm extension, then lower the weight back down to your starting position.</p>
+                        <img src="img\exMilitaryPress.jpg" align="middle" alt="Bench Press" height="200">  
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>Barbell Row (arms & back)</h3>
+                        <p>Stand with your feet slightly wider than shoulder-width apart and grip the barbell with your arms close to the outside of each leg. Bend your knees slightly, and lean the torso forward from the hips to initiate the starting position. From there, pull the barbell up to your chest, then let it back down to a hang.</p>
+                        <img src="img\exBarbellRow.jpg" align="middle" alt="Bench Press" height="200">  
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                </div>
+                <div data-role="collapsible">
+                    <h3>Core</h3>
+                    <div data-role="collapsible">
+                        <h3>Deadlift (pretty much everything)</h3>
+                        <p>Begin with your feet hip-width apart, standing in front of a barbell that is resting on the ground. Bend your knees & hinge forward at the hips to grip the barbell, then straighten your knees and stand upright, bringing the barbell off the ground. It is important to keep your back straight, and the barbell close to your legs while deadlifting.</p>
+                        <img src="img\exDeadlift.jpg" align="middle" alt="Bench Press" height="200">  
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>Decline sit up (abs)</h3>
+                        <p>Lay with your back against a decline bench, holding a small dumbbell in each hand. Place your hands where you feel comfortable for sit ups (across the chest, behind the head), and perform your sit-ups as you normally would.</p>
+                        <img src="img\exDeclineSitUp.jpg" align="middle" alt="Bench Press" height="200">  
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                </div>
+                <div data-role="collapsible">
+                    <h3>Lower Body</h3>
+                    <div data-role="collapsible">
+                        <h3>Back Squat (glutes, legs, core)</h3>
+                        <p>At the squat rack, place the barbell over your shoulders, squeezing your shoulder blades together to make a “shelf” for the weight with your upper back. Holding that in place, bend your knees and squat to parallel or below parallel, then rise back up.</p>
+                        <img src="img\exBackSquat.jpg" align="middle" alt="Bench Press" height="200"> 
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>Power Clean (legs, core)</h3>
+                        <p>Begin the lift with a deadlift movement, bringing the barbell from the ground up to a standing position. Then, with the help of a hip-thrust, bring the weight up to your shoulders, rotating your hands & arms underneath the bar, and catching it with a slight dip in the knees.</p>
+                        <img src="img\exPowerClean.jpg" align="middle" alt="Bench Press" height="200"> 
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>
+                    <div data-role="collapsible">
+                        <h3>Lunges (glutes, hamstrings, quads)</h3>
+                        <p>Stand and hold a dumbbell in each hand, with your arms at your sides. Step forward with one foot, bending your front leg to a 90-degree angle, lowering yourself down until your back knee lightly brushes the floor before standing up.</p>
+                        <img src="img\exLunges.jpg" align="middle" alt="Bench Press" height="200"> 
+                        <a class="workoutButton" href="#page2" data-role="button" data-mini="true" data-transition="slideup">Start!</a>
+                    </div>            
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" id="momeFoot">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" class="ui-btn-active ui-state-persist"><span class="glyphicon glyphicon-th-large"></span><div class="footerText">Exercises</div></a></li>
+                    <li><a href="#page3" class="" data-transition="slide"><span class="glyphicon glyphicon-user"></span><div class="footerText">Users</div></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="page2" ng-app="myIonicPopUpApp" ng-controller="PopupCtrl">
+        <div data-role="content">
+            <button id="planButton" class="button button-primary" ng-click="showPopup();"> Make Your Plan </button>
+            <button id="picButton" class="button button-primary" ng-click=""> Take Pictures </button>
+            <button id="bmiButton" class="button button-primary" ng-click=""> Get BMI </button>
+            <button id="backButton" class="button button-primary" ng-click=""> Back </button>
+        </div>
+    </div>
+
+    <div data-role="page" id="page2b">
+        <div data-role="content">
+            <h1>Body Mass Index Calculator</h1>
+            <p>Enter your height: <input type="text" id="height"/>
+            <select type="multiple" id="heightunits">
+                <option value="metres" selected="selected">metres</option>
+                <option value="inches">inches</option>
+            </select>
+            </p>
+            <p>Enter your weight: <input type="text" id="weight"/>
+            <select type="multiple" id="weightunits">
+                <option value="kg" selected="selected">kilograms</option>
+                <option value="lb">pounds</option>
+            </select>
+            </p>
+            <input type="submit" value="computeBMI" onclick="computeBMI();">
+            <h1>Your BMI is: <span id="output">?</span></h1>
+            <h2>This means you are: <span id="comment"> ?</span> </h2>
+            <button id="backButtonBmi" class="button button-primary" ng-click=""> Back </button>
+        </div>
+    </div>
+
+    <div data-role="page" id="page3">
+        <div role="content" class="ui-content">
+            <div data-role="tabs">
+                <div data-role="navbar">
+                    <ul>
+                        <li id="teamtab"><a href="#teamTab" class="ui-btn-active">Team</a></li>
+                        <li><a href="#searchTab">Search</a></li>
+                        <li><a href="#profileTab">Profile</a></li>
+                    </ul>
+                </div>
+                <div id="teamTab">
+                    <div id="usersList">
+                        <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                            <div class="userTile"><img src="img/roger.png" /></div>
+                            <div class="userData">
+                                <div class="userName">Roger Rabbit</div>
+                                <div class="userLocation">Las Vegas, NV, USA</div>
+                            </div>
+                            <div class="userActions">
+                                <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div id="searchTab">
+                    <div id="selectTitle">Work out with...</div>
+                    <div id="searchUser" class="row">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <input id="searchUserText" type="text" class="form-control" placeholder="Search by name or id!" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResultsList">
+                        <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                            <div class="userTile"><img src="img/roger.png" /></div>
+                            <div class="userData">
+                                <div class="userName">Roger Rabbit</div>
+                                <div class="userLocation">Las Vegas, NV, USA</div>
+                            </div>
+                            <div class="userActions">
+                                <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div id="profileTab">
+                    <div class="profileImage"><img src="img/duke.png" /></div>
+                    <div class="profileData">
+                        <div class="profileName">Duke Nukem</div>
+                        <div class="profileLocation">Seoul, South Korea</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div data-role="footer" data-position="fixed" id="momeFoot">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page1" class="" data-transition="slide" data-direction="reverse"><span class="glyphicon glyphicon-th-large"></span><div class="footerText">Exercises</div></a></li>
+                    <li><a href="" class="ui-btn-active ui-state-persist"><span class="glyphicon glyphicon-user" data-transition="slide" data-direction="reverse"></span><div class="footerText">Users</div></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>  
     <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="js/jquery-migrate-3.0.0.min.js"></script>
     <!--<script src="js/jquery-ui-1.12.1.min.js"></script>-->
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/bootstrap.3.3.7.min.js"></script>
+    <script src="js/ionic.bundle.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/workoutpage.js"></script>
+    <script>
+    </script>
     <script>
         // $("#firstname").parent.toggle();
-        $("#moreInfo").toggle();
+        $(document).on("pageinit", "#page0", function() { $("#moreInfo").toggle(); });
 
         $("#newUserButton").click(function(e) {
             $("#loginButton").toggle();
@@ -92,9 +292,146 @@
         $("#loginButton").click(function(e) { loggedIn(1); });
 
         function loggedIn(inID) {
-            $(":mobile-pagecontainer").pagecontainer( "change", "exerciselist.html", { transition: "pop" });
+            $(":mobile-pagecontainer").pagecontainer( "change", "#page1", { transition: "pop" });
             //$.mobile.changePage("exerciselist.html", 'pop');
         }
-    </script>
+        // $('.userWrapper').on('click', function (evt) { console.log("Clicked on User: " + $(this).attr('id')); });
+
+        $("#backButton").click(function() {
+            $(":mobile-pagecontainer").pagecontainer( "change", "#page1", { transition: "pop" });
+        });
+
+        $("#bmiButton").click(function() {
+            $(":mobile-pagecontainer").pagecontainer( "change", "#page2b", { transition: "pop" });
+            // $(":mobile-pagecontainer").pagecontainer( "change", "#page2b", { transition: "pop", role: "dialog" });
+        });
+        $("#backButtonBmi").click(function() {
+            $(":mobile-pagecontainer").pagecontainer( "change", "#page2", { transition: "pop" });
+        });
+
+        function computeBMI() {
+            //Obtain user inputs
+            var height=Number(document.getElementById("height").value);
+            var heightunits=document.getElementById("heightunits").value;
+            var weight=Number(document.getElementById("weight").value);
+            var weightunits=document.getElementById("weightunits").value;
+
+            //Convert all units to metric
+            if (heightunits=="inches") height /= 39.3700787;
+            if (weightunits=="lb") weight /= 2.20462;
+
+            //Perform calculation
+            var BMI = weight / Math.pow(height,2);
+
+            //Display result of calculation
+            document.getElementById("output").innerText = Math.round(BMI*100)/100;
+
+            var output =  Math.round(BMI*100)/100;
+            if (output<18.5)
+                document.getElementById("comment").innerText = "Underweight";
+            else if (output>=18.5 && output<=25)
+                document.getElementById("comment").innerText = "Normal";
+            else if (output>=25 && output<=30)
+                document.getElementById("comment").innerText = "Obese";
+            else if (output>30)
+                document.getElementById("comment").innerText = "Overweight";
+            // document.getElementById("answer").value = output;
+        }
+
+        $(document).on("pageinit", "#page3", function() { console.log("Page 3!"); getTeam(); });
+        $("#teamtab").click(function() { getTeam(); });
+        $('#searchUserText').on('keypress', function (evt) { if (evt.which === 13) { findTeam(); } });
+        $('.input-group-btn').click(function(e) { findTeam(); });
+
+        function getTeam() {
+            var thisObj = {
+                event: "getfriendlist"
+                , payload: {
+                    userid: 1
+                    , offset: 0
+                }
+            }
+            sendWS(thisObj, function(inData) {
+                if (inData) {
+                    var inObj = JSON.parse(inData);
+                   if (inObj.code === 0) {
+                        for (var i = 0; i < inObj.results.length; i++) {
+                            var thisResults = inObj.results[i];
+                            var newHtml = '<div class="userWrapper" id="' + thisResults.UserID + '">'
+                                + '<div class="userTile"><img src="img/duke.png" /></div>'
+                                + '<div class="userData">'
+                                    + '<div class="userName">' + thisResults.Username + '</div>'
+                                    + '<div class="userFullname">' + thisResults.FirstName + ' ' + thisResults.LastName + '</div>'
+                                + '</div>'
+                                + '<div class="userActions">'
+                                    + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
+                                + '</div>'
+                                + '</div>';
+                            $("#usersList").append(newHtml);
+                            $("#usersList").enhanceWithin();
+                        }
+                    } else { alert("PROBLEM: " + inObj.message); }
+                }
+            });
+        }
+
+        function findTeam() {
+            var searchTerm = $("#searchUserText").val();
+            console.log("Got search term: " + searchTerm);
+
+            var errorMsg = [];
+            searchTerm = searchTerm.trim();
+            if (searchTerm.length < 3) errorMsg.push("Search term needs to be at least 3 characters!");
+
+            if (errorMsg.length !== 0) {
+                alert(errorMsg.join('\n'));
+                return;
+            }
+
+            var thisObj = {
+                event: "searchforuser"
+                , payload: {
+                    parameter: searchTerm
+                    , offset: 0
+                }
+            };
+            sendWS(thisObj, function(inData) {
+                if (inData) {
+                    var inObj = JSON.parse(inData);
+                    $("#searchResultsList").empty();
+                    if (inObj.code === 0) {
+                        for (var i = 0; i < inObj.results.length; i++) {
+                            var thisResults = inObj.results[i];
+                            var newHtml = '<div class="userWrapper" id="' + thisResults.UserID + '">'
+                                + '<div class="userTile"><img src="img/duke.png" /></div>'
+                                + '<div class="userData">'
+                                    + '<div class="userName">' + thisResults.Username + '</div>'
+                                    + '<div class="userFullname">' + thisResults.FirstName + ' ' + thisResults.LastName + '</div>'
+                                + '</div>'
+                                + '<div class="userActions">'
+                                    + '<a href="#" data-role="button" data-mini="true">Add to Team</a>'
+                                + '</div>'
+                                + '</div>';
+                            $("#searchResultsList").append(newHtml);
+                            $("#searchResultsList").enhanceWithin();
+                            let friendID = thisResults.UserID;
+                            $("#" + inObj[i].UserID).click(function() {
+                                var reqObj = {
+                                    event: "addfriend"
+                                    , payload: {
+                                        userid: 1
+                                        , frienduserid: friendID 
+                                    }
+                                }
+                                sendWS(reqObj, function(inAddResult) { alert(inAddResult); })
+                            });
+                        }
+                    } else { "PROBLEM: " + alert(inObj.message); }
+                }
+            });
+        }
+
+        //$("#tabs").tabs();
+   </script>
 </body>
 </html>
