@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-"hello, dante!"
-=======
 "Hello, Alex!" 
->>>>>>> sungeun

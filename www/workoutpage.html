@@ -4,27 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
     <link href="http://code.ionicframework.com/1.1.0/css/ionic.min.css" rel="stylesheet">
-
-    <script src="http://code.ionicframework.com/1.1.0/js/ionic.bundle.js"></script>
-
-    <script src="js/utils.js"></script>
-    <script src="workoutpage.js"></script>
-
+    <style>
+      body { text-align: center; }
+      #planButton, #picButton {
+        display: block;
+        margin: 10em auto 10em auto;
+      }
+    </style>
   </head>
   <body ng-app="myIonicPopUpApp" ng-controller="PopupCtrl">
 
-  <button class="button button-primary" ng-click="showPopup()">
-    Make Your Plan
-  </button>
+    <button id="planButton" class="button button-primary" ng-click="showPopup()"> Make Your Plan </button>
+    <button id="picButton" class="button button-primary" ng-click=""> Take Pictures </button>
 
-<br><br>
-
-  <button class="button button-primary" ng-click="">
-    Take Pictures
-  </button>
-
-
+    <script src="js/ionic.bundle.js"></script>
+    <!--<script src="js/utils.js"></script>-->
+    <script src="js/workoutpage.js"></script>
   </body>
 </html>
