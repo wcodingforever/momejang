@@ -1,0 +1,49 @@
+import pymysql.cursors
+
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                             user='root',
+                             password='1cptcrunch',
+                             db='momejang',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+try:
+    with connection.cursor() as cursor:
+
+        sql = "CREATE TABLE User (UserID bigint auto_increment primary key, UserName varchar(20), FirstName varchar(20), LastName varchar(20), Country varchar(50), Password varchar(25), active bit);" \
+                "CREATE TABLE FriendList" \
+                "(FriendListID bigint auto_increment primary key, UserID bigint, FriendUserID bigint, " \
+                "CONSTRAINT fk_friendlist_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE," \
+                "CONSTRAINT fk_friendlist_user_frienduserid FOREIGN KEY (FriendUserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE); " \
+                "CREATE TABLE ChatRoom" \
+                "(ChatRoomID bigint auto_increment primary key, ChatRoomName varchar(24), CreatedAt DateTime);" \
+                "CREATE TABLE GroupUser" \
+                "(GroupID bigint auto_increment primary key, ChatRoomID bigint, UserID bigint, " \
+                "CONSTRAINT fk_groupuser_chatroom_chatroomid FOREIGN KEY (ChatRoomID) REFERENCES ChatRoom (ChatRoomID) ON DELETE RESTRICT ON UPDATE CASCADE," \
+                "CONSTRAINT fk_groupuser_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE);" \
+                "CREATE TABLE Message" \
+                "(MessageID bigint auto_increment primary key, FromUserID bigint, ToGroupID bigint, MessageText varchar(1024), MessageType varchar(1), SentAt DateTime, " \
+                "CONSTRAINT fk_message_user_fromuserid FOREIGN KEY (FromUserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE," \
+                "CONSTRAINT fk_message_chatroom_togroupid FOREIGN KEY (ToGroupID) REFERENCES ChatRoom (ChatRoomID) ON DELETE RESTRICT ON UPDATE CASCADE);" \
+                "CREATE TABLE Profile" \
+                "(ProfileID bigint auto_increment primary key, UserID bigint, ProfilePicture varchar(256), AboutMe varchar(256), " \
+                "CONSTRAINT fk_profile_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE);" \
+                "CREATE FULLTEXT INDEX usersearchindex ON User (Username, FirstName, LastName);" \
+                "CREATE TABLE UserWorkout" \
+                "(UserWorkoutID bigint auto_increment primary key, UserID bigint, WorkoutName varchar(256), WorkoutDate DateTime, " \
+                "CONSTRAINT fk_userworkout_user_userid FOREIGN KEY (UserID) References User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE); " \
+                "CREATE TABLE UserHistory " \
+                "(UserHistoryID bigint auto_increment primary key, UserID bigint, Exercise varchar(256), Repetitions bigint, Sets bigint, " \
+                "CONSTRAINT fk_userhistory_user_userid FOREIGN KEY (UserID) REFERENCES User (UserID) ON DELETE RESTRICT ON UPDATE CASCADE);"
+
+        cursor.execute(sql)
+
+
+    # connection is not autocommit by default. So you must commit to save
+    # your changes.
+    connection.commit()
+
+
+finally:
+    connection.close()
