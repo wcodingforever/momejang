@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add to your Team...</title>
+    <title>MomeJang!</title>
     <!--<link rel="stylesheet" href="css/vendor/jquery-ui-1.12.1.min.css" />-->
     <link rel="stylesheet" href="css/vendor/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/vendor/bootstrap.3.3.7.min.css" />
@@ -12,58 +12,72 @@
     </style>
 </head>
 <body>
-    <div role="main" class="ui-content">
-        <div data-role="tabs">
+    <div role="page">
+        <div role="content" class="ui-content">
+            <div data-role="tabs">
+                <div data-role="navbar">
+                    <ul>
+                        <li id="teamtab"><a href="#teamTab" class="ui-btn-active">Team</a></li>
+                        <li><a href="#searchTab">Search</a></li>
+                        <li><a href="#profileTab">Profile</a></li>
+                    </ul>
+                </div>
+                <div id="teamTab">
+                    <div id="usersList">
+                        <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                            <div class="userTile"><img src="img/roger.png" /></div>
+                            <div class="userData">
+                                <div class="userName">Roger Rabbit</div>
+                                <div class="userLocation">Las Vegas, NV, USA</div>
+                            </div>
+                            <div class="userActions">
+                                <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div id="searchTab">
+                    <div id="selectTitle">Work out with...</div>
+                    <div id="searchUser" class="row">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <input id="searchUserText" type="text" class="form-control" placeholder="Search by name or id!" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResultsList">
+                        <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
+                            <div class="userTile"><img src="img/roger.png" /></div>
+                            <div class="userData">
+                                <div class="userName">Roger Rabbit</div>
+                                <div class="userLocation">Las Vegas, NV, USA</div>
+                            </div>
+                            <div class="userActions">
+                                <a href="#" data-role="button" data-mini="true">Add to Team</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div id="profileTab">
+                    <div class="profileImage"><img src="img/duke.png" /></div>
+                    <div class="profileData">
+                        <div class="profileName">Duke Nukem</div>
+                        <div class="profileLocation">Seoul, South Korea</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div data-role="footer" data-position="fixed" id="momeFoot">
             <div data-role="navbar">
                 <ul>
-                    <li id="teamtab"><a href="#teamTab" class="ui-btn-active">Team</a></li>
-                    <li><a href="#searchTab">Search</a></li>
-                    <li><a href="#profileTab">Profile</a></li>
+                    <li><a href="#exerciselist.html" class="ui-btn-active ui-state-persist "><span class="glyphicon glyphicon-th-large"></span><div class="footerText">Exercises</div></a></li>
+                    <li><a href="#users.html" class=""><span class="glyphicon glyphicon-user"></span><div class="footerText">Users</div></a></li>
                 </ul>
-            </div>
-            <div id="teamTab">
-                <div id="usersList">
-                    <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
-                        <div class="userTile"><img src="img/roger.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Roger Rabbit</div>
-                            <div class="userLocation">Las Vegas, NV, USA</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>-->
-                </div>
-            </div>
-            <div id="searchTab">
-                <div id="selectTitle">Work out with...</div>
-                <div id="searchUser" class="input-group">
-                    <input id="searchUserText" type="text" class="form-control" placeholder="Search by name or id!" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </button>
-                    </span>
-                </div>
-                <div id="searchResultsList">
-                    <!--<div class="userWrapper" id="19c7eda1-9174-44bd-8f96-9b2dd10f226b">
-                        <div class="userTile"><img src="img/roger.png" /></div>
-                        <div class="userData">
-                            <div class="userName">Roger Rabbit</div>
-                            <div class="userLocation">Las Vegas, NV, USA</div>
-                        </div>
-                        <div class="userActions">
-                            <a href="#" data-role="button" data-mini="true">Add to Team</a>
-                        </div>
-                    </div>-->
-                </div>
-            </div>
-            <div id="profileTab">
-                <div class="profileImage"><img src="img/duke.png" /></div>
-                <div class="profileData">
-                    <div class="profileName">Duke Nukem</div>
-                    <div class="profileLocation">Seoul, South Korea</div>
-                </div>
             </div>
         </div>
     </div>
@@ -107,6 +121,7 @@
                                 + '</div>'
                                 + '</div>';
                             $("#usersList").append(newHtml);
+                            $("#usersList").enhanceWithin();
                         }
                     } else { alert("PROBLEM: " + inObj.message); }
                 }
@@ -151,6 +166,7 @@
                                 + '</div>'
                                 + '</div>';
                             $("#searchResultsList").append(newHtml);
+                            $("#searchResultsList").enhanceWithin();
                             let friendID = thisResults.UserID;
                             $("#" + inObj[i].UserID).click(function() {
                                 var reqObj = {
