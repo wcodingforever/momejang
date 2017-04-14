@@ -91,7 +91,10 @@
 
         $("#loginButton").click(function(e) { loggedIn(1); });
 
-        function loggedIn(inID) { window.location.href=""; }
+        function loggedIn(inID) {
+            $(":mobile-pagecontainer").pagecontainer( "change", "exerciselist.html", { transition: "pop" });
+            //$.mobile.changePage("exerciselist.html", 'pop');
+        }
     </script>
 </body>
 </html>
