@@ -284,10 +284,10 @@
         });
 
         $("#addUserButton").click(function(e) {
-            let newUser = ($("#username").val()) ? $("#username").val() : "";
-            let newPass = ($("#passwd").val()) ? $("#passwd").val() : "";
-            let fname = ($("#firstname").val()) ? $("#firstname").val() : "";
-            let lname = ($("#lastname").val()) ? $("#lastname").val() : "";
+            let newUser = ($("#createUsername").val()) ? $("#createUsername").val() : "";
+            let newPass = ($("#createPassword").val()) ? $("#createPassword").val() : "";
+            let fname = ($("#createFirstname").val()) ? $("#createFirstname").val() : "";
+            let lname = ($("#createLastname").val()) ? $("#createLastname").val() : "";
             var newObj = {
                 event: "createnewuser"
                 , payload: {
@@ -303,7 +303,7 @@
                 if (inData) {
                     var inObj = JSON.parse(inData);
                     if (inObj.code === 0) {
-                        alert("User " + $("#username").val() + " created! Welcome!");
+                        alert("User " + $("#createUsername").val() + " created! Welcome!");
                     } else {
                         alert("Problem creating user: " + inObj.message);
                     }
