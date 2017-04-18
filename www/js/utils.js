@@ -17,6 +17,7 @@
 //
 function sendWS(inObj, callback) {
     if ("WebSocket" in window) {
+        // ws = new WebSocket("ws://172.24.2.186:8001/");
         ws = new WebSocket("ws://192.168.1.193:8001/");
         // ws = new WebSocket("ws://192.168.1.119:8001/");
 
