@@ -68,16 +68,20 @@
 <body>
     <div data-role="page" id="page0">
         <div id="loginArea">
-            <input type="text" id="username" value="pumpyouup">
-            <input type="password" id="passwd" value="hanzfranz">
-            <div id="moreInfo">
-                <input type="text" id="firstname">
-                <input type="text" id="lastname">
-                <div id="addUserButton">Add User</div>
+            <div id="loginUserInfo">
+                <input type="text" id="loginUsername" value="pumpyouup">
+                <input type="password" id="loginPassword" value="hanzfranz">
+                <div id="loginButton">Login</div>
+                <div id="newUserButton">New User</div>
             </div>
-            <div id="loginButton">Login</div>
-            <div id="newUserButton">New User</div>
-            <div id="existingUserButton">I have a username.</div>
+            <div id="createUserInfo">
+                <input type="text" id="createUsername" value="pumpyouup">
+                <input type="password" id="createPassword" value="hanzfranz">
+                <input type="text" id="createFirstname">
+                <input type="text" id="createLastname">
+                <div id="addUserButton">Add User</div>
+                <div id="existingUserButton">I have a username.</div>
+            </div>
         </div>
     </div>
 
@@ -121,7 +125,7 @@
                     </div>
                 </div>
                 <div data-role="collapsible">
-                    <h3>Lower Body</h3>
+                    <h3>Lower Body</h3>
                     <div data-role="collapsible">
                         <h3>Back Squat (glutes, legs, core)</h3>
                         <p>At the squat rack, place the barbell over your shoulders, squeezing your shoulder blades together to make a “shelf” for the weight with your upper back. Holding that in place, bend your knees and squat to parallel or below parallel, then rise back up.</p>
@@ -266,22 +270,17 @@
     <script>
         // $("#firstname").parent.toggle();
         $(document).on("pageinit", "#page0", function() {
-            $("#moreInfo").toggle();
-            $("#existingUserButton").toggle();
+            $("#createUserInfo").toggle();
         });
 
         $("#newUserButton").click(function(e) {
-            $("#loginButton").toggle();
-            $("#moreInfo").toggle();
-            $("#newUserButton").toggle();
-            $("#existingUserButton").toggle();
+            $("#loginUserInfo").toggle();
+            $("#createUserInfo").toggle();
         });
 
         $("#existingUserButton").click(function(e) {
-            $("#loginButton").toggle();
-            $("#moreInfo").toggle();
-            $("#newUserButton").toggle();
-            $("#existingUserButton").toggle();
+            $("#loginUserInfo").toggle();
+            $("#createUserInfo").toggle();
         });
 
         $("#addUserButton").click(function(e) {
